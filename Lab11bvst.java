@@ -1,6 +1,6 @@
 // Lab11bvst.java
 // This is the Student starting version for the <Deck> class lab 11b assignment. 
-
+import java.util.ArrayList;
 public class Lab11bvst {
 	public static void main(String[] args) {
 	Deck deck = new Deck(); // create a new deck
@@ -36,13 +36,10 @@ public class Lab11bvst {
 	}
 
 	class Deck {
-		private Card[] decks; // Our deck
+		private ArrayList<Card> decks;// Our deck
 		private int size; // the deck size
-		public void add(String suit, String rank, int value) {
-			Card temp = new Card(suit, rank, value); // add a card with the values
-			decks[size] = temp; // add it to the deck
-			size++; // increase the size
-		}
+		
+		private int length;
 		public Deck() {
 			String[] suit = { "Clubs", "Diamonds", "Hearts", "Spades" }; // Suites Array
 			String[] rank = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
@@ -52,28 +49,25 @@ public class Lab11bvst {
 
 			int SUITS = suit.length; // Size of the Suites Array
 			int RANKS = rank.length; // Size of the Ranks Array
-			decks = new Card[52]; // lets start our new deck
+			ArrayList<Card> decks = new ArrayList<Card>(); // lets start our new deck
 
 
 			for (int i = 0; i < RANKS; i++) { // for the 13 possible card ranks
 				for (int j = 0; j < SUITS; j++) { // for each of the 4 suites
-					this.add(suit[j], rank[i], value[i]); // add the card
+					Card temp = new Card(suit[j], rank[i], value[i]); // add the card
+					decks.add(temp);
+					this.length = decks.size();
+
 				}
 			}
-		    shuffle(); // shuffle the deck
+		    // shuffle(); // shuffle the deck
 		}
 		private void shuffle() {
-			for (int s = 0; s < 1000; s++) { // for 1000 times
-				int i = (int) (Math.random() * (decks.length)); // our first random number
-	            int r = i + (int) (Math.random() * (decks.length-i)); // our second random number
-	            Card t = decks[r]; // this is the card that will be swapped
-	            decks[r] = decks[i]; // swap one
-	            decks[i] = t; // swap 2
-			}
+	
    	    }  
         public void display() { // print out the deck
       		for (int k = 0; k < size; k++) // for every card in the deck
-         		System.out.println(decks[k]); // print out the card
+         		System.out.println(this.decks); // print out the card
       		System.out.println(); // New line
    	    }  
 	}
